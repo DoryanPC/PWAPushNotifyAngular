@@ -1,0 +1,8 @@
+
+
+{"publicKey":"BBxVIegBGDP2eo1wsx_m777_5qI5q3IvyBH5SLb54NmItBs8L0XVnIreUG1LLdedPpLnphJVvoMINxBN1eDBvmc",
+"privateKey":"dhjgipONCV9PCjY-3BImAvSp-RKGDa5ZD4FZSjpcUoM"}
+
+
+ng build --configuration production
+npx http-server -p 8080 -c-1 dist/browser ->servir con servidor http
