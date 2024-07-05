@@ -6,6 +6,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "production": "ng build --configuration production && npx http-server -p 8080 -c-1 dist/browser",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
