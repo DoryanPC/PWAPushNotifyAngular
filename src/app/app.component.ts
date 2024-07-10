@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { SwUpdate,SwPush } from '@angular/service-worker';
-import { APIRestServiceService } from './apirest-service.service';
+import { APIRestServiceService } from './Service/apirest-service.service';
+import { Notification } from '../app/Models/Notification.model';
+
+import { FormsModule } from '@angular/forms'; // Asegúrate de importar FormsModule
 
 
 @Component({
   standalone: true,
   selector: 'app-root',
+  imports: [FormsModule],
   templateUrl: './app.component.html'
 })
 export class AppComponent {
@@ -14,27 +18,34 @@ export class AppComponent {
   title = 'Service Workers';
   updateCheckText = '';
   data='';
+  notificacion = new Notification()
+
+  notificaciones: any;
 
   public readonly VAPID_PUBLIC_KEY = 'BBxVIegBGDP2eo1wsx_m777_5qI5q3IvyBH5SLb54NmItBs8L0XVnIreUG1LLdedPpLnphJVvoMINxBN1eDBvmc';
 
 
   constructor(private update: SwUpdate,private swPush: SwPush,private apiRest: APIRestServiceService) {
     this.SucribirToNotification();
+    this.getNotifications();
   }
 
+  getNotifications(): any {
+    
+    this.apiRest.getNotofications().subscribe({
+      next: (response) =>  this.notificaciones=response,
+      error: (err) => console.error(err),
+    });
+
+  }
 
   SucribirToNotification(): any {
-      console.log("este es el metodo de  notificacion");
 
       this.swPush.requestSubscription({
         serverPublicKey:this.VAPID_PUBLIC_KEY
       }).then(sub => {
 
-        console.log("este es el them");
-
         const token =JSON.parse(JSON.stringify(sub));
-
-        console.log("ojito",token);
 
         this.apiRest.saveToken(token).subscribe({
           next: (response) => console.log("response savetoken"),
@@ -45,14 +56,21 @@ export class AppComponent {
       });
   }
 
-  updateCheck(): void {
-    this.update
-        .checkForUpdate()
-        .then(() => this.updateCheckText = 'resolved')
-        .catch(err => this.updateCheckText = `rejected: ${err.message}`);
+  EventEmitir(IdNotify: any): any {
+    this.apiRest.EmitirNotificacion(IdNotify).subscribe({
+      next: (response) => console.log("Notificacion emitida"),
+      error: (err) => console.error(err),
+      complete: () => console.log('Data fetch complete')
+    });
   }
 
-  /*ngOnInit() {
-    this.SucribirToNotification();
-  }*/
+  guardarUsuario(){
+
+    this.apiRest.saveNotification(this.notificacion).subscribe({
+      next: (response) =>   this.notificaciones.push(response),
+      error: (err) => console.error(err),
+      complete: () => console.log('Data fetch complete')
+    });
+  }
+
 }

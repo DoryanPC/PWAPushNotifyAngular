@@ -3,24 +3,35 @@
   <h1>
     Prueba PWA/Push Notification Angular
   </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+  <img width="3px" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
 </div>
 
-<button type="button" id="check" (click)="updateCheck()">Check for Update</button>
-<p id="checkResult">{{updateCheckText}}</p>
+<table>
+  <div style="display:flex">
+      <div>
+        <form (ngSubmit) = "guardarUsuario()">
+          <label for="titulo">Titulo:</label>
+          <input id="titulo" name="titulo" [(ngModel)]="notificacion.titulo" required>
+          <label for="texto_notificacion">Texto de Notificación:</label>
+          <input id="texto_notificacion" name="texto_notificacion" [(ngModel)]="notificacion.texto" required>
+          <button type="submit" class="btn-submit" (click)="guardarUsuario()">Enviar</button>
+        </form>
+      </div>
+  </div>
+  <tr>
+    <th style="width:15%;">Titulo</th>
+    <th style="width:60%;">Cuerpo</th>
+    <th style="width:25%;text-align: center;">Acción</th>
+  </tr>
 
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/guide/service-worker-intro">Angular Service Worker Intro</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial/tour-of-heroes">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+  @for (notificacion of notificaciones.data;track notificacion.id) {
+
+  <tr >
+    <td>{{ notificacion.title }}</td>
+    <td>{{ notificacion.body }}</td>
+    <td style="text-align: center;"><button type="button" (click)="EventEmitir(notificacion._id)">Emitir Push</button> </td>
+  </tr>
+
+}
+
+</table>
