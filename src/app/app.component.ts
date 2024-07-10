@@ -4,12 +4,13 @@ import { APIRestServiceService } from './Service/apirest-service.service';
 import { Notification } from '../app/Models/Notification.model';
 
 import { FormsModule } from '@angular/forms'; // Asegúrate de importar FormsModule
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
   standalone: true,
   selector: 'app-root',
-  imports: [FormsModule],
+  imports: [ FormsModule,NgbModule ],
   templateUrl: './app.component.html'
 })
 export class AppComponent {
