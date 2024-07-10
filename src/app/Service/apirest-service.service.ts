@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 
 export class APIRestServiceService {
 
-  public url ='http://localhost:8000/api';
+  public url ='http://10.217.0.125:8000/api';
 
   constructor(private http: HttpClient){ }
 
