@@ -5,6 +5,7 @@ import { Notification } from '../app/Models/Notification.model';
 
 import { FormsModule } from '@angular/forms'; // Asegúrate de importar FormsModule
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -65,18 +66,15 @@ export class AppComponent {
     });
   }
 
-  guardarNotificacion(){
+  guardarNotificacion(form: NgForm){
+
+    console.log(form);
 
     this.apiRest.saveNotification(this.notificacion).subscribe({
-      next: (response) => {
-
-        console.log(response);
-
-        console.log(this.notificaciones);
-
-        this.notificaciones.push(response)
-
-        console.log(this.notificaciones);
+      next: (answer) => {
+        this.notificaciones.data.push(answer);
+        this.notificacion.titulo='';
+        this.notificacion.texto='';
       },
       error: (err) => console.error(err),
       complete: () => console.log('Data fetch complete')
