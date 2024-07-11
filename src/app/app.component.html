@@ -3,37 +3,40 @@
   <h1>
     Prueba PWA/Push Notification Angular
   </h1>
-  <img width="3px" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+  <img width="175px" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
 </div>
-
-<table>
-  <div style="display:flex">
-      <div>
-        <form (ngSubmit) = "guardarUsuario()">
-          <label for="titulo">Titulo:</label>
-          <input id="titulo" name="titulo" [(ngModel)]="notificacion.titulo" required>
-          <label for="texto_notificacion">Texto de Notificación:</label>
-          <input id="texto_notificacion" name="texto_notificacion" [(ngModel)]="notificacion.texto" required>
-          <button type="submit" class="btn-submit" (click)="guardarUsuario()">Enviar</button>
-          
-          <button type="button" class="btn btn-primary">Primary</button>
-        </form>
-      </div>
-  </div>
-  <tr>
-    <th style="width:15%;">Titulo</th>
-    <th style="width:60%;">Cuerpo</th>
-    <th style="width:25%;text-align: center;">Acción</th>
-  </tr>
-
+         <div class="container">
+            <form>
+            <div class="row justify-content-md-center mb-4">
+              <div class="col-md-3 col-lg-3">
+                <label for="titulo" class="mt-1">Titulo: </label>
+                <input id="titulo" name="titulo" [(ngModel)]="notificacion.titulo" required>
+              </div>
+              <div class="col-md-3 col-lg-3">
+                <label for="texto_notificacion" class="mt-1">Texto de Notificación:</label>
+                <input id="texto_notificacion" name="texto_notificacion" [(ngModel)]="notificacion.texto" required>
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-primary" (click)="guardarNotificacion()">Enviar</button>
+              </div>
+            </div>
+          </form>
+          </div>     
+  <table class="table table-striped">
+    <thead>
+      <th scope="col" style="width:15%;">Titulo</th>
+      <th scope="col" style="width:60%;">Cuerpo</th>
+      <th scope="col" style="width:25%;text-align: center;">Acción</th>
+    </thead>
+    <tbody>
+    
   @for (notificacion of notificaciones.data;track notificacion.id) {
-
-  <tr >
-    <td>{{ notificacion.title }}</td>
-    <td>{{ notificacion.body }}</td>
-    <td style="text-align: center;"><button type="button" (click)="EventEmitir(notificacion._id)">Emitir Push</button> </td>
-  </tr>
-
-}
-
+      <tr>
+        <td>{{ notificacion.title }}</td>
+        <td>{{ notificacion.body }}</td>
+        <td style="text-align: center;"><button type="button" class="btn btn-success" (click)="EventEmitir(notificacion._id)">Emitir Push</button> </td>
+      </tr>
+  }
+  
+</tbody>
 </table>

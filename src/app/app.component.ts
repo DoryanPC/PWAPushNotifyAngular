@@ -65,10 +65,19 @@ export class AppComponent {
     });
   }
 
-  guardarUsuario(){
+  guardarNotificacion(){
 
     this.apiRest.saveNotification(this.notificacion).subscribe({
-      next: (response) =>   this.notificaciones.push(response),
+      next: (response) => {
+
+        console.log(response);
+
+        console.log(this.notificaciones);
+
+        this.notificaciones.push(response)
+
+        console.log(this.notificaciones);
+      },
       error: (err) => console.error(err),
       complete: () => console.log('Data fetch complete')
     });
